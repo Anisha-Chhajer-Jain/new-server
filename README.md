@@ -28,7 +28,7 @@ The objective of this project is to practice building a RESTful API using Node.j
 1. **Clone the Repository**:
    ```bash
    git clone <repository-url>
-   cd Assignment-1
+   cd new-server
    ```
 
 2. **Install Dependencies**:
@@ -50,4 +50,4 @@ The objective of this project is to practice building a RESTful API using Node.j
    The server will be running at `http://localhost:3000`.
 
 ## Deployed Link
-[Click here to view the deployed application](https://node-assignment-1-dhkc.onrender.com/)
+[Click here to view the deployed application](https://new-server-m1wu.onrender.com/)
