@@ -1,7 +1,14 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const app = express();
 
 app.use(express.json());
+
+mongoose.connect('mongodb://localhost:27017/flipkart')
+.then(()=>console.log("mongodb connected sucessfully"))
+.catch((error)=>console.log("mongodb connection failed",error));
+
+const User = mongoose.model('User', new mongoose.Schema);
 
 const students = [
   {
@@ -77,7 +84,7 @@ const students = [
 ];
 
 app.get('/', (req, res) => {
-  res.send("Welcome to the Student Management API");
+  res.send("Student Management API");
 })
 
 app.get('/students', (req, res) => {
