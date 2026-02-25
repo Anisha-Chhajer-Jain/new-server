@@ -123,8 +123,8 @@ app.put("/products/:id", (req, res) => {
   res.status(200).json(products[index]);
 });
 
-// PUT - Update Only Stock
-app.put("/products/:id/stock", (req, res) => {
+// PATCH - Update Only Stock
+app.patch("/products/:id/stock", (req, res) => {
   const id = parseInt(req.params.id);
   const product = products.find(p => p.id === id);
 
@@ -137,7 +137,21 @@ app.put("/products/:id/stock", (req, res) => {
   res.status(200).json(product);
 });
 
-//PT - Update Only Price
+// // PUT - Update Only Stock
+// app.put("/products/:id/stock", (req, res) => {
+//   const id = parseInt(req.params.id);
+//   const product = products.find(p => p.id === id);
+
+//   if (!product) {
+//     return res.status(404).json({ message: "Product not found" });
+//   }
+
+//   product.stock = req.body.stock;
+
+//   res.status(200).json(product);
+// });
+
+// PUT - Update Only Price
 app.put("/products/:id/price", (req, res) => {
   const id = parseInt(req.params.id);
   const product = products.find(p => p.id === id);
