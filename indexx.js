@@ -123,7 +123,7 @@ app.put("/products/:id", (req, res) => {
   res.status(200).json(products[index]);
 });
 
-// Update Only Stock
+// PUT - Update Only Stock
 app.put("/products/:id/stock", (req, res) => {
   const id = parseInt(req.params.id);
   const product = products.find(p => p.id === id);
