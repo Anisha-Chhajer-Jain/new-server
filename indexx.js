@@ -8,7 +8,7 @@ const PORT = 3000;
 app.use(cors());
 app.use(express.json());
 
-// In-Memory Data
+// In-Memory Data---------------not saved permanently------------If server restarts → data resets.
 let products = [
   {
     id: 1,
@@ -60,9 +60,11 @@ app.get("/products", (req, res) => {
   res.status(200).json(products);
 });
 
+// req.params.id → gets ID from URL
+// parseInt() converts string to number
 app.get("/products/:id", (req, res) => {
   const id = parseInt(req.params.id);
-  const product = products.find(p => p.id === id);
+  const product = products.find(p => p.id === id);//.find() searches array--Returns first matching product
 
   if (!product) {
     return res.status(404).json({ message: "Product not found" });
@@ -74,7 +76,7 @@ app.get("/products/:id", (req, res) => {
 app.get("/products/category/:categoryName", (req, res) => {
   const categoryName = req.params.categoryName;
 
-  const filteredProducts = products.filter(
+  const filteredProducts = products.filter( //filter() returns multiple matches----toLowerCase() makes it case-insensitive
     p => p.category.toLowerCase() === categoryName.toLowerCase()
   );
 
@@ -82,7 +84,7 @@ app.get("/products/category/:categoryName", (req, res) => {
 });
 
 app.post("/products", (req, res) => {
-  const { name, category, price, stock, rating } = req.body;
+  const { name, category, price, stock, rating } = req.body;  //Extract data from body
 
   const newProduct = {
     id: products.length > 0 ? products[products.length - 1].id + 1 : 1,
@@ -98,9 +100,10 @@ app.post("/products", (req, res) => {
   res.status(201).json(newProduct);
 });
 
+//PUT – Replace Entire Product
 app.put("/products/:id", (req, res) => {
   const id = parseInt(req.params.id);
-  const index = products.findIndex(p => p.id === id);
+  const index = products.findIndex(p => p.id === id); //.findIndex() gives position in array
 
   if (index === -1) {
     return res.status(404).json({ message: "Product not found" });
@@ -120,6 +123,7 @@ app.put("/products/:id", (req, res) => {
   res.status(200).json(products[index]);
 });
 
+// Update Only Stock
 app.put("/products/:id/stock", (req, res) => {
   const id = parseInt(req.params.id);
   const product = products.find(p => p.id === id);
@@ -133,6 +137,7 @@ app.put("/products/:id/stock", (req, res) => {
   res.status(200).json(product);
 });
 
+//Update Only Price
 app.put("/products/:id/price", (req, res) => {
   const id = parseInt(req.params.id);
   const product = products.find(p => p.id === id);
