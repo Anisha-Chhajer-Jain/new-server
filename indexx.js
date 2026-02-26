@@ -78,7 +78,7 @@ app.get("/products/category/:categoryName", (req, res) => {
 app.post("/products", (req, res) => {
   const { name, category, price, stock, rating } = req.body;  
   const newProduct = {
-    id: products.length > 0 ? products[products.length - 1].id + 1 : 1,
+    id,
     name,
     category,
     price,
