@@ -1,6 +1,5 @@
 const express = require("express");
 const cors = require("cors");
-
 const app = express();
 const PORT = 3000;
 
@@ -57,7 +56,6 @@ app.get("/", (req, res) => {
 app.get("/products", (req, res) => {
   res.status(200).json(products);
 });
-
 app.get("/products/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const product = products.find(p => p.id === id)
@@ -65,13 +63,11 @@ app.get("/products/:id", (req, res) => {
   if (!product) {
     return res.status(404).json({ message: "Product not found" });
   }
-
   res.status(200).json(product);
 });
 
 app.get("/products/category/:categoryName", (req, res) => {
   const categoryName = req.params.categoryName;
-
   const filteredProducts = products.filter( 
     p => p.category.toLowerCase() === categoryName.toLowerCase()
   );
@@ -81,7 +77,6 @@ app.get("/products/category/:categoryName", (req, res) => {
 
 app.post("/products", (req, res) => {
   const { name, category, price, stock, rating } = req.body;  
-
   const newProduct = {
     id: products.length > 0 ? products[products.length - 1].id + 1 : 1,
     name,
@@ -92,20 +87,17 @@ app.post("/products", (req, res) => {
   };
 
   products.push(newProduct);
-
   res.status(201).json(newProduct);
 });
 
 app.put("/products/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const index = products.findIndex(p => p.id === id);
-
   if (index === -1) {
     return res.status(404).json({ message: "Product not found" });
   }
 
   const { name, category, price, stock, rating } = req.body;
-
   products[index] = {
     id: id,
     name,
@@ -137,11 +129,9 @@ app.put("/products/:id", (req, res) => {
 app.put("/products/:id/stock", (req, res) => {
   const id = parseInt(req.params.id);
   const product = products.find(p => p.id === id);
-
   if (!product) {
     return res.status(404).json({ message: "Product not found" });
   }
-
   product.stock = req.body.stock;
 
   res.status(200).json(product);
@@ -154,9 +144,7 @@ app.put("/products/:id/price", (req, res) => {
   if (!product) {
     return res.status(404).json({ message: "Product not found" });
   }
-
   product.price = req.body.price;
-
   res.status(200).json(product);
 });
 
