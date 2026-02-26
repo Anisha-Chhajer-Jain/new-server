@@ -8,7 +8,7 @@ const PORT = 3000;
 app.use(cors());
 app.use(express.json());
 
-// In-Memory Data---------------not saved permanently------------If server restarts → data resets.
+// In-Memory Data-------not saved permanently-------If server restarts -> data resets.
 let products = [
   {
     id: 1,
@@ -137,19 +137,20 @@ app.put("/products/:id", (req, res) => {
 //   res.status(200).json(product);
 // });
 
-// // PUT - Update Only Stock
-// app.put("/products/:id/stock", (req, res) => {
-//   const id = parseInt(req.params.id);
-//   const product = products.find(p => p.id === id);
+// PUT - Update Only Stock
 
-//   if (!product) {
-//     return res.status(404).json({ message: "Product not found" });
-//   }
+app.put("/products/:id/stock", (req, res) => {
+  const id = parseInt(req.params.id);
+  const product = products.find(p => p.id === id);
 
-//   product.stock = req.body.stock;
+  if (!product) {
+    return res.status(404).json({ message: "Product not found" });
+  }
 
-//   res.status(200).json(product);
-// });
+  product.stock = req.body.stock;
+
+  res.status(200).json(product);
+});
 
 // PUT - Update Only Price
 app.put("/products/:id/price", (req, res) => {
