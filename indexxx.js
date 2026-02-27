@@ -194,5 +194,5 @@ app.delete("/states/low-literacy/:percentage", (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on the port ${PORT}`);
 });
