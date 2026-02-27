@@ -115,82 +115,82 @@ app.get("/states/highest-gdp", (req, res) => {
 //   res.status(200).json(state);
 // });
 
-app.patch("/states/:id/literacy", (req, res) => {
-  const id = parseInt(req.params.id);
-  const state = states.find(s => s.id === id);
+// app.patch("/states/:id/literacy", (req, res) => {
+//   const id = parseInt(req.params.id);
+//   const state = states.find(s => s.id === id);
 
-  if (!state) {
-    return res.status(404).json({ message: "State not found" });
-  }
+//   if (!state) {
+//     return res.status(404).json({ message: "State not found" });
+//   }
 
-  state.literacyRate = req.body.literacyRate;
-  res.status(200).json(state);
-});
+//   state.literacyRate = req.body.literacyRate;
+//   res.status(200).json(state);
+// });
 
-app.patch("/states/:id/gdp", (req, res) => {
-  const id = parseInt(req.params.id);
-  const state = states.find(s => s.id === id);
+// app.patch("/states/:id/gdp", (req, res) => {
+//   const id = parseInt(req.params.id);
+//   const state = states.find(s => s.id === id);
 
-  if (!state) {
-    return res.status(404).json({ message: "State not found" });
-  }
+//   if (!state) {
+//     return res.status(404).json({ message: "State not found" });
+//   }
 
-  state.gdp = req.body.gdp;
-  res.status(200).json(state);
-});
+//   state.gdp = req.body.gdp;
+//   res.status(200).json(state);
+// });
 
-app.patch("/states/:id", (req, res) => {
-  const id = parseInt(req.params.id);
-  const state = states.find(s => s.id === id);
+// app.patch("/states/:id", (req, res) => {
+//   const id = parseInt(req.params.id);
+//   const state = states.find(s => s.id === id);
 
-  if (!state) {
-    return res.status(404).json({ message: "State not found" });
-  }
+//   if (!state) {
+//     return res.status(404).json({ message: "State not found" });
+//   }
 
-  Object.assign(state, req.body);
+//   Object.assign(state, req.body);
 
-  res.status(200).json(state);
-});
+//   res.status(200).json(state);
+// });
 
-app.delete("/states/:id", (req, res) => {
-  const id = parseInt(req.params.id);
-  const index = states.findIndex(s => s.id === id);
+// app.delete("/states/:id", (req, res) => {
+//   const id = parseInt(req.params.id);
+//   const index = states.findIndex(s => s.id === id);
 
-  if (index === -1) {
-    return res.status(404).json({ message: "State not found" });
-  }
+//   if (index === -1) {
+//     return res.status(404).json({ message: "State not found" });
+//   }
 
-  states.splice(index, 1);
-  res.status(204).send();
-});
+//   states.splice(index, 1);
+//   res.status(204).send();
+// });
 
-app.delete("/states/name/:stateName", (req, res) => {
-  const name = req.params.stateName.toLowerCase();
-  const index = states.findIndex(
-    s => s.name.toLowerCase() === name
-  );
+// app.delete("/states/name/:stateName", (req, res) => {
+//   const name = req.params.stateName.toLowerCase();
+//   const index = states.findIndex(
+//     s => s.name.toLowerCase() === name
+//   );
 
-  if (index === -1) {
-    return res.status(404).json({ message: "State not found" });
-  }
+//   if (index === -1) {
+//     return res.status(404).json({ message: "State not found" });
+//   }
 
-  states.splice(index, 1);
-  res.status(204).send();
-});
+//   states.splice(index, 1);
+//   res.status(204).send();
+// });
 
-app.delete("/states/low-literacy/:percentage", (req, res) => {
-  const percentage = parseFloat(req.params.percentage);
+// app.delete("/states/low-literacy/:percentage", (req, res) => {
+//   const percentage = parseFloat(req.params.percentage);
 
-  const initialLength = states.length;
+//   const initialLength = states.length;
 
-  states = states.filter(
-    s => s.literacyRate >= percentage
-  );
+//   states = states.filter(
+//     s => s.literacyRate >= percentage
+//   );
 
-  const deletedCount = initialLength - states.length;
+//   const deletedCount = initialLength - states.length;
 
-  res.status(200).json({ deletedCount });
-});
+//   res.status(200).json({ deletedCount });
+// });
 
 app.listen(PORT, () => {
   console.log(`Server running on the port ${PORT}`);
