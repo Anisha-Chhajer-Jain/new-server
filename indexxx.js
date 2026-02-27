@@ -115,42 +115,42 @@ app.put("/states/:id/population", (req, res) => {
   res.status(200).json(state);
 });
 
-// app.patch("/states/:id/literacy", (req, res) => {
-//   const id = parseInt(req.params.id);
-//   const state = states.find(s => s.id === id);
+app.patch("/states/:id/literacy", (req, res) => {
+  const id = parseInt(req.params.id);
+  const state = states.find(s => s.id === id);
 
-//   if (!state) {
-//     return res.status(404).json({ message: "State not found" });
-//   }
+  if (!state) {
+    return res.status(404).json({ message: "State not found" });
+  }
 
-//   state.literacyRate = req.body.literacyRate;
-//   res.status(200).json(state);
-// });
+  state.literacyRate = req.body.literacyRate;
+  res.status(200).json(state);
+});
 
-// app.patch("/states/:id/gdp", (req, res) => {
-//   const id = parseInt(req.params.id);
-//   const state = states.find(s => s.id === id);
+app.patch("/states/:id/gdp", (req, res) => {
+  const id = parseInt(req.params.id);
+  const state = states.find(s => s.id === id);
 
-//   if (!state) {
-//     return res.status(404).json({ message: "State not found" });
-//   }
+  if (!state) {
+    return res.status(404).json({ message: "State not found" });
+  }
 
-//   state.gdp = req.body.gdp;
-//   res.status(200).json(state);
-// });
+  state.gdp = req.body.gdp;
+  res.status(200).json(state);
+});
 
-// app.patch("/states/:id", (req, res) => {
-//   const id = parseInt(req.params.id);
-//   const state = states.find(s => s.id === id);
+app.patch("/states/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const state = states.find(s => s.id === id);
 
-//   if (!state) {
-//     return res.status(404).json({ message: "State not found" });
-//   }
+  if (!state) {
+    return res.status(404).json({ message: "State not found" });
+  }
 
-//   Object.assign(state, req.body);
+  Object.assign(state, req.body);
 
-//   res.status(200).json(state);
-// });
+  res.status(200).json(state);
+});
 
 // app.delete("/states/:id", (req, res) => {
 //   const id = parseInt(req.params.id);
