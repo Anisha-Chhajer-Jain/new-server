@@ -6,21 +6,13 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-/* -------------------- DATABASE CONNECTION -------------------- */
-
 mongoose.connect("mongodb://localhost:27017/Flipkart")
     .then(() => console.log("MongoDB Connected Successfully"))
     .catch((error) => console.log("Database Connection Failed:", error.message));
 
-
-/* -------------------- ROOT ROUTE -------------------- */
-
 app.get("/", (req, res) => {
     res.status(200).send("Mongoose Server Day2");
 });
-
-
-/* -------------------- ORDER SCHEMA -------------------- */
 
 const orderSchema = new mongoose.Schema({
     productName: {
@@ -43,9 +35,6 @@ const orderSchema = new mongoose.Schema({
 
 const Order = mongoose.model("Order", orderSchema);
 
-
-/* -------------------- USER SCHEMA -------------------- */
-
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -67,9 +56,6 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", userSchema);
 
-
-/* -------------------- GET ALL ORDERS -------------------- */
-
 app.get("/orders", async (req, res) => {
     try {
         const data = await Order.find();
@@ -78,8 +64,6 @@ app.get("/orders", async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 });
-
-
 
 app.post("/users", async (req, res) => {
     try {
@@ -103,7 +87,6 @@ app.post("/users", async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 });
-
 
 app.listen(3000, () => {
     console.log("Express server started on port 3000");
