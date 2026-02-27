@@ -60,60 +60,60 @@ app.get("/states/highest-gdp", (req, res) => {
   res.status(200).json(highest);
 });
 
-// app.post("/states", (req, res) => {
-//   const { name, population, literacyRate, annualBudget, gdp } = req.body;
+app.post("/states", (req, res) => {
+  const { name, population, literacyRate, annualBudget, gdp } = req.body;
 
-//   const newState = {
-//     id: states.length ? states[states.length - 1].id + 1 : 1,
-//     name,
-//     population,
-//     literacyRate,
-//     annualBudget,
-//     gdp
-//   };
+  const newState = {
+    id: states.length ? states[states.length - 1].id + 1 : 1,
+    name,
+    population,
+    literacyRate,
+    annualBudget,
+    gdp
+  };
 
-//   states.push(newState);
-//   res.status(201).json(newState);
-// });
+  states.push(newState);
+  res.status(201).json(newState);
+});
 
-// app.put("/states/:id", (req, res) => {
-//   const id = parseInt(req.params.id);
-//   const index = states.findIndex(s => s.id === id);
+app.put("/states/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const index = states.findIndex(s => s.id === id);
 
-//   if (index === -1) {
-//     return res.status(404).json({ message: "State not found" });
-//   }
+  if (index === -1) {
+    return res.status(404).json({ message: "State not found" });
+  }
 
-//   const { name, population, literacyRate, annualBudget, gdp } = req.body;
+  const { name, population, literacyRate, annualBudget, gdp } = req.body;
 
-//   states[index] = { id, name, population, literacyRate, annualBudget, gdp };
+  states[index] = { id, name, population, literacyRate, annualBudget, gdp };
 
-//   res.status(200).json(states[index]);
-// });
+  res.status(200).json(states[index]);
+});
 
-// app.put("/states/:id/budget", (req, res) => {
-//   const id = parseInt(req.params.id);
-//   const state = states.find(s => s.id === id);
+app.put("/states/:id/budget", (req, res) => {
+  const id = parseInt(req.params.id);
+  const state = states.find(s => s.id === id);
 
-//   if (!state) {
-//     return res.status(404).json({ message: "State not found" });
-//   }
+  if (!state) {
+    return res.status(404).json({ message: "State not found" });
+  }
 
-//   state.annualBudget = req.body.annualBudget;
-//   res.status(200).json(state);
-// });
+  state.annualBudget = req.body.annualBudget;
+  res.status(200).json(state);
+});
 
-// app.put("/states/:id/population", (req, res) => {
-//   const id = parseInt(req.params.id);
-//   const state = states.find(s => s.id === id);
+app.put("/states/:id/population", (req, res) => {
+  const id = parseInt(req.params.id);
+  const state = states.find(s => s.id === id);
 
-//   if (!state) {
-//     return res.status(404).json({ message: "State not found" });
-//   }
+  if (!state) {
+    return res.status(404).json({ message: "State not found" });
+  }
 
-//   state.population = req.body.population;
-//   res.status(200).json(state);
-// });
+  state.population = req.body.population;
+  res.status(200).json(state);
+});
 
 // app.patch("/states/:id/literacy", (req, res) => {
 //   const id = parseInt(req.params.id);
