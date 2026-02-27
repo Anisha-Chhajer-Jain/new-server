@@ -152,45 +152,45 @@ app.patch("/states/:id", (req, res) => {
   res.status(200).json(state);
 });
 
-// app.delete("/states/:id", (req, res) => {
-//   const id = parseInt(req.params.id);
-//   const index = states.findIndex(s => s.id === id);
+app.delete("/states/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const index = states.findIndex(s => s.id === id);
 
-//   if (index === -1) {
-//     return res.status(404).json({ message: "State not found" });
-//   }
+  if (index === -1) {
+    return res.status(404).json({ message: "State not found" });
+  }
 
-//   states.splice(index, 1);
-//   res.status(204).send();
-// });
+  states.splice(index, 1);
+  res.status(204).send();
+});
 
-// app.delete("/states/name/:stateName", (req, res) => {
-//   const name = req.params.stateName.toLowerCase();
-//   const index = states.findIndex(
-//     s => s.name.toLowerCase() === name
-//   );
+app.delete("/states/name/:stateName", (req, res) => {
+  const name = req.params.stateName.toLowerCase();
+  const index = states.findIndex(
+    s => s.name.toLowerCase() === name
+  );
 
-//   if (index === -1) {
-//     return res.status(404).json({ message: "State not found" });
-//   }
+  if (index === -1) {
+    return res.status(404).json({ message: "State not found" });
+  }
 
-//   states.splice(index, 1);
-//   res.status(204).send();
-// });
+  states.splice(index, 1);
+  res.status(204).send();
+});
 
-// app.delete("/states/low-literacy/:percentage", (req, res) => {
-//   const percentage = parseFloat(req.params.percentage);
+app.delete("/states/low-literacy/:percentage", (req, res) => {
+  const percentage = parseFloat(req.params.percentage);
 
-//   const initialLength = states.length;
+  const initialLength = states.length;
 
-//   states = states.filter(
-//     s => s.literacyRate >= percentage
-//   );
+  states = states.filter(
+    s => s.literacyRate >= percentage
+  );
 
-//   const deletedCount = initialLength - states.length;
+  const deletedCount = initialLength - states.length;
 
-//   res.status(200).json({ deletedCount });
-// });
+  res.status(200).json({ deletedCount });
+});
 
 app.listen(PORT, () => {
   console.log(`Server running on the port ${PORT}`);
