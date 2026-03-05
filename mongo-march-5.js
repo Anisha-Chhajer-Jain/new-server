@@ -61,16 +61,30 @@ mongoose.connect("mongodb+srv://anishajain:12345@cluster0.slwensz.mongodb.net/we
 .then(()=> console.log("MongoDB connected successfully"))
 .catch((error)=> console.log("MongoDB connection failed :- " , error))
 
-
-const userSchema = new mongoose.Schema({
-    name: String,
-    email: String,
-    password: String
+const userSchema = new mongoose.Schema(
+{
+    name: {
+        type:String,
+        minlength:2,
+        required:true
+    },
+    email: {
+        type:String,
+        required:true,
+        lowercase:true,
+        unique:true
+    },
+    password: {
+        type:String,
+        required:true,
+        minlength:6
+    }
 },
 {
-  versionKey: false,
-  timestamps: false
-});
+    versionKey: false,
+    timestamps: true
+}
+);
 
 const User = mongoose.model("User", userSchema);
 
@@ -89,13 +103,19 @@ app.get("/users/:id", async (req,res)=>{
 })
 
 app.post("/addUser", async (req,res)=>{
-
+  try{
     const user = new User(req.body);
     await user.save();
 
     res.status(201).json({
         message:"User added"
-    })
+    });
+  }
+  catch(err){
+    res.status(500).json({
+        error: err.message
+    });
+  }
 })
 
 app.post("/addUsers", async (req,res)=>{
